@@ -1,0 +1,32 @@
+{
+  "name": "helm",
+  "version": "0.1.0",
+  "description": "A minimal hash router for browsers.",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "jshint index.js tests.js && jscs index.js tests.js && testem ci",
+    "watch": "testem -g"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RealGeeks/helm.git"
+  },
+  "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
+  "bugs": {
+    "url": "https://github.com/RealGeeks/helm/issues"
+  },
+  "homepage": "https://github.com/RealGeeks/helm",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^5.10.0",
+    "jscs": "^1.6.1",
+    "jshint": "^2.5.5",
+    "tape": "^2.14.0",
+    "testem": "^0.6.18"
+  },
+  "dependencies": {
+    "path-to-regexp": "^1.0.1"
+  }
+}
