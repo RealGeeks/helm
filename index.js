@@ -102,7 +102,7 @@ HelmPrototype.dispatch = function (path, context) {
   var i = 0;
 
   context = context || {};
-  context.path = path || '';
+  context.path = path || helm.getPath();
   context.params = [];
 
   function next() {

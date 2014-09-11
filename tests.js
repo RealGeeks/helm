@@ -90,3 +90,37 @@ test('Helm custom prefix', function (assert) {
 
   window.location.hash = '!/blah';
 });
+
+test('Helm dispatch with empty path', function (assert) {
+  assert.plan(1);
+
+  function runTest() {
+    var router = helm({
+      window: window
+    });
+
+    router.on('someplace', function () {
+      assert.pass('dispatch successful');
+    });
+
+    router.dispatch();
+  }
+
+  var listener;
+
+  if (window.attachEvent) {
+    listener = function () {
+      window.detachEvent('onhashchange', listener);
+      runTest();
+    };
+    window.attachEvent('onhashchange', listener);
+  } else {
+    listener = function () {
+      window.removeEventListener('hashchange', listener, false);
+      runTest();
+    };
+    window.addEventListener('hashchange', listener, false);
+  }
+
+  window.location.hash = 'someplace';
+});
