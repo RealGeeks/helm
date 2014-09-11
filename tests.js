@@ -104,6 +104,7 @@ test('Helm dispatch with empty path', function (assert) {
     });
 
     router.dispatch();
+    router.stop();
   }
 
   var listener;
