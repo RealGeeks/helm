@@ -40,6 +40,11 @@ function Helm(options) {
    * Handler for the `hashchange` event.
    */
   helm.listener = function () {
+    if (helm.silent) {
+      helm.silent = false;
+      return;
+    }
+
     helm.dispatch(helm.getPath());
   };
 
@@ -92,6 +97,22 @@ HelmPrototype.getPath = function () {
 };
 
 /**
+ * Change hash to `path`, optionally silencing callbacks.
+ *
+ * @param {String}  path
+ * @param {Boolean} silent
+ */
+HelmPrototype.setPath = function (path, silent) {
+  var helm = this;
+
+  if (silent) {
+    helm.silent = true;
+  }
+
+  helm.window.location.hash = helm.prefix + (path || '');
+};
+
+/**
  * Dispatch `path`, passing optional initial `context` object.
  *
  * @param {String} path
@@ -113,13 +134,6 @@ HelmPrototype.dispatch = function (path, context) {
   }
 
   next();
-};
-
-/**
- * Change hash to `path`.
- */
-HelmPrototype.go = function (path) {
-  this.window.location.hash = this.prefix + (path || '');
 };
 
 /**

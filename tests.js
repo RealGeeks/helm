@@ -125,3 +125,23 @@ test('Helm dispatch with empty path', function (assert) {
 
   window.location.hash = 'someplace';
 });
+
+test('Helm setPath', function (assert) {
+  var router = helm({
+    window: window
+  });
+
+  assert.plan(1);
+
+  router.on('route', function (context) {
+    assert.equal(context.path, 'route', 'path set successfully');
+    router.stop();
+  });
+
+  router.on('silent', function () {
+    assert.fail('should not have triggered callback');
+  });
+
+  router.setPath('silent', true);
+  router.setPath('route');
+});
